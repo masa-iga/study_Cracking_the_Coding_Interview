@@ -11,12 +11,42 @@ How to approach:
 
 Assumptions
 - Has several floors
-- For buses, cars and motor cycles
-- Coinparking
+- For buses, cars and motorcycles
+- parking fee depends on car sizes
 
 Core objects
 - A parking lot
--- Spaeces for buses, cars and motor cycles
---- position (floor and #), available, how many hours occupied
--- Fare adjustment machine
+- Spaeces for buses, cars and motor cycles
+-- position (floor and #), available, how many hours occupied
+- Vehicles
+
+Actions
+
+////////////////////////////
+@startuml
+
+class Parking {
+}
+
+Parking o-- Space
+class Space {
+    bool available
+    const int feePerHour
+    int charge
+}
+
+Space <|-- CarSpace
+class CarSpace {
+}
+
+Space <|-- BusSpace
+class BusSpace {
+}
+
+Space <|-- MotorcycleSpace
+class MotorcycleSpace {
+}
+
+@enduml
+
 */
