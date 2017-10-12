@@ -21,11 +21,22 @@ Core objects
 - Vehicles
 
 Actions
+- Park/leave at
+- Pay
+- Check a charge
+- Check if it's vacant
 
 ////////////////////////////
 @startuml
 
 class Parking {
+    Vector<CarSpace> carSpaces
+    Vector<BusSpace> busSpaces
+    Vector<MotorcycleSpace> motorcycleSpaces
+    bool isAvailable(eSpace space)
+    Space* parkAt(eSpace space)
+    int getCharge(Space* pSpace)
+    void leaveAt(Space* pSpace)
 }
 
 Parking o-- Space
@@ -33,6 +44,9 @@ class Space {
     bool available
     const int feePerHour
     int charge
+    int number
+    Time parkedTime
+    Space(int feePerHour, int number)
 }
 
 Space <|-- CarSpace
@@ -48,5 +62,6 @@ class MotorcycleSpace {
 }
 
 @enduml
+
 
 */
