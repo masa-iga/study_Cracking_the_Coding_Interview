@@ -26,27 +26,36 @@ Actions
 - Check a charge
 - Check if it's vacant
 
-////////////////////////////
-@startuml
+**************************
+  My answer
+**************************
 
+@startuml
 class Parking {
-    Vector<CarSpace> carSpaces
-    Vector<BusSpace> busSpaces
-    Vector<MotorcycleSpace> motorcycleSpaces
-    bool isAvailable(eSpace space)
-    Space* parkAt(eSpace space)
-    int getCharge(Space* pSpace)
-    void leaveAt(Space* pSpace)
+    - Vector<CarSpace> carSpaces
+    - Vector<BusSpace> busSpaces
+    - Vector<MotorcycleSpace> motorcycleSpaces
+    
+    + bool isAvailable(eSpace space)
+    + Space* parkAt(eSpace space)
+    + int checkCharge(Space* pSpace)
+    + int payCharge(Space* pSpace, int money)
+    - void leaveAt(Space* pSpace)
 }
 
 Parking o-- Space
 class Space {
-    bool available
-    const int feePerHour
-    int charge
-    int number
-    Time parkedTime
-    Space(int feePerHour, int number)
+    - bool available
+    - const int feePerHour
+    - int currentCharge
+    - int idNumber
+    - Time parkTime
+    - Vehicle* parkedVehicle
+    + Space(int feePerHour, int number)
+    + bool isAvailable()
+    + Space* park(Vehicle* vechicle)
+    + void leave(Vehicle* vehicle)
+    + int getCurrentCharge()
 }
 
 Space <|-- CarSpace
@@ -63,5 +72,10 @@ class MotorcycleSpace {
 
 @enduml
 
+// Bus, Car, Motorcycle等の継承がうまく使えなかった
+
+**************************
+  Example answer
+**************************
 
 */
