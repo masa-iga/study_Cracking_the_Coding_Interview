@@ -79,6 +79,7 @@ class MotorcycleSpace {
 /**************************
   Example answer
 **************************/
+// https://github.com/careercup/ctci/tree/master/java/Chapter%208/Question8_4
 
 Enum VehicleSize { Motorcycle, Compact, Large }
 
