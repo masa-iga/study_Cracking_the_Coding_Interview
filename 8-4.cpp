@@ -78,8 +78,8 @@ class MotorcycleSpace {
 */
 /**************************
   Example answer
+    https://github.com/careercup/ctci/tree/master/java/Chapter%208/Question8_4
 **************************/
-// https://github.com/careercup/ctci/tree/master/java/Chapter%208/Question8_4
 
 Enum VehicleSize { Motorcycle, Compact, Large }
 
@@ -172,3 +172,76 @@ private:
   int spotNumber;
   Level level;
 };
+
+/**************************
+  class diagram
+**************************/
+/*
+@startuml
+
+abstract class Vehicle {
+    # Vector<ParkingSpot> parkingSpots
+    # String licensePlate
+    # int spotsNeeded
+    # VehicleSize size
+    + int getSpotsNeeded()
+    + VehicleSize getSize()
+    + void parkInSpot(ParkingSpot s)
+    + void clearSpots()
+    + {abstract} bool canFitInSpot(ParkingSpot spot)
+}
+
+Bus --|> Vehicle
+class Bus {
+    + Bus()
+    + bool canFitInSpot(ParkingSpot spot)
+}
+
+Car --|> Vehicle
+class Car {
+}
+
+Motorcycle --|> Vehicle
+class Motorcycle {
+}
+
+class ParkingLot {
+    - Level[]   levels
+    - const int NUM_LEVELS = 5
+    + bool parkVehicle(Vehicle vehicle)
+}
+
+ParkingLot o-- Level
+class Level {
+    - int floor
+    - ParkingSpot[] spots
+    - int availableSpots
+    - {static} const int SPOTS_PER_ROW = 10
+    
+    + Level(int flr, int numberSpots)
+    + int availableSports
+    + bool parkVehicle(Vehicle vehicle)
+    - bool parkStartingAtSpot(int num, Vehicle v)
+    - int findAvailableSpots(Vehicle vehicle)
+    + void spotFreed()
+}
+
+Level o-- ParkingSpot
+class ParkingSpot {
+    - Vehicle vehicle
+    - VehicleSize spotSize
+    - int row
+    - int spotNumber
+    - Level level
+    
+    + ParkingSpot(Level lvl, int r, int n, VehicleSize s)
+    + bool isAvailable()
+    + bool canFitVehicle(Vehicle vehicle)
+    + bool park(Vehicle v)
+    + int getRow()
+    + int getSpotNumber()
+    + void removeVehicle()
+}
+
+@enduml
+*/
