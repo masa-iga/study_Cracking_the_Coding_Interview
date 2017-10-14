@@ -25,11 +25,12 @@ Actions
 - Pay
 - Check a charge
 - Check if it's vacant
+*/
 
-**************************
+/**************************
   My answer
-**************************
-
+**************************/
+/*
 @startuml
 class Parking {
     - Vector<CarSpace> carSpaces
@@ -74,8 +75,75 @@ class MotorcycleSpace {
 
 // Bus, Car, Motorcycle等の継承がうまく使えなかった
 
-**************************
+*/
+/**************************
   Example answer
-**************************
+**************************/
+
+Enum VehicleSize { Motorcycle, Compact, Large }
+
+class Vehicle {
+protected:
+  Vector<ParkingSpot> parkingSpots;
+  String licensePlate;
+  int spotsNeeded;
+  VehicleSize size;
+
+public:
+  int getSpotsNeeded()
+  VehicleSize getSize()
+  
+  /* Park vehicle in this spot (among others, potentially) */
+  void parkInSpot(ParkingSpot s);
+  
+  /* Remove car from spot, and notify spot that it's gone */
+  void clearSpots();
+  
+  /* Checks if the spot is big enough for the vehicle (and is
+   * available). This compares the SIZE only. It does not check it
+   * has enough spots. */
+  virtual bool canFitInSpot(ParkingSpot spot);
+};
+
+// TODO: write down inherited classes
+
+class ParkingLot {
+public:
+  ParkingLot();
+  /* Park the vehicle in a spot (or multiple spots).
+   * Return false if failed. */
+  bool parkVehicle(Vehicle* vehicle);
+
+private:
+  Level[] levels;
+  const int NUM_LEVELS = 5;
+};
+
+class Level {
+public:
+  Level(int flr, int numberSpots);
+  int availableSpots();
+  
+  /* Find a place to park this vehicle. Return false if failed. */
+  bool parkVehicle(Vehicle* vehicle);
+  
+  /* Park a vehicle starting at the spot spotNumber, and
+   * continuing until vehicle.spotsNeeded. */
+  bool parkStartingAtSpot(int num, Vehicle v);
+
+  /* When a car was removed from the spot, increment
+   * availableSpots */
+  void spotFreed();
+  
+private:
+  int floor;
+  ParkingSpot[] spots;
+  int availableSpots = 0; // number of free spots
+  static const int SPOTS_PER_ROW = 10;
+  
+  /* Find a spot to park this vehicle. Return index of spot, or -1
+   * on failure. */
+  int findAvailableSpots(Vehicle vehicle);
+};
 
 */
