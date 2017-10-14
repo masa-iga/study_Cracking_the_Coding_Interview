@@ -146,4 +146,28 @@ private:
   int findAvailableSpots(Vehicle vehicle);
 };
 
-*/
+class ParkingSpot {
+public:
+  ParkingSpot(int lvl, int r, int n, VehicleSize s);
+  bool isAvailable();
+  
+  /* Check if the spot is big enough and is available */
+  bool canFitVehicle(Vehicle vehicle);
+  
+  /* Park vehicle in this spot. */
+  bool park(Vehicle* v);
+  
+  int getRow();
+  int getSpotNumber();
+  
+  /* Remove vehicle from spot, and notify level that a new spot is
+   * available */
+  void removeVehicle();
+  
+private:
+  Vehicle* vehicle;
+  VehicleSize spotSize;
+  int row;
+  int spotNumber;
+  Level level;
+};
