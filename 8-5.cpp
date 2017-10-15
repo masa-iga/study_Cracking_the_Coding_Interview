@@ -18,5 +18,8 @@
 
 /*
   Core objects:
-    - 
+    - Model
+    - View
+    - Controller
+    - User
 */
