@@ -14,6 +14,7 @@
     - A user which has an account can access his personal ebook
     - Generally, two users (accounts) access the ebook simultaneously
     - The service is available for several OSs. e.g. Windows, Mac, Android and iOS
+    - User accesses the ebook via client software
 */
 
 /*
@@ -21,5 +22,16 @@
     - Model
     - View
     - Controller
-    - User
+    - Server
+*/
+
+/*
+  Actions:
+    - Login
+    - Show a ebook list
+    - Select a book to read
+    - Proceed to the next page
+    - Back to the previous page
+    - Close a book
+    - Logout
 */
