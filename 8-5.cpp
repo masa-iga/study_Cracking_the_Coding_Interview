@@ -19,9 +19,9 @@
 
 /*
   Core objects:
-    - Model
-    - View
-    - Controller
+    - ClientModel
+    - ClientViewer
+    - ClientInterface
     - Server
 */
 
@@ -34,4 +34,64 @@
     - Back to the previous page
     - Close a book
     - Logout
+*/
+
+/*
+@startuml
+
+class ClientController {
+}
+
+ClientController -->ClientViewer : update
+class ClientViewer {
+}
+
+ClientController --> Model : manipulate
+class Model {
+}
+
+Model --> ClientViewer : update
+
+@enduml
+*/
+
+/*
+Answer:
+
+@startuml
+
+class OnlineReaderSystem {
+    - Library library
+    - UserManager usermanager
+    - Display display
+    - Book activeBook
+    - User activeUser
+}
+
+class Library {
+    - map<int, Book> books
+}
+
+class UserManager {
+    - map<int, User> users
+}
+
+class Display {
+    - Book activeBook
+    - User activeUser
+    - int pageNumber = 0
+}
+
+class Book {
+    - int bookId
+    - string details
+}
+
+class User {
+    - int userId
+    - string details
+    - int accountType
+}
+
+@enduml
 */
