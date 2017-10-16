@@ -58,7 +58,7 @@ Model --> ClientViewer : update
 /*
 Answer:
 
-@startuml
+@@startuml
 
 class OnlineReaderSystem {
     - Library library
@@ -66,32 +66,88 @@ class OnlineReaderSystem {
     - Display display
     - Book activeBook
     - User activeUser
+    
+    + Library getLibrary()
+    + UserManager getUserManager()
+    + Display getDisplay()
+    + Book getActiveBook()
+    + void setActiveBook(Book book)
+    + User getActiveUser()
+    + void setActiveUser()
 }
 
 class Library {
     - map<int, Book> books
+    + Book addBook(int id, string details)
+    + bool remove(Book b)
+    + bool remove(int id)
+    + Book find(int id)
 }
 
 class UserManager {
     - map<int, User> users
+    
+    + User addUser(int id, string details, int accountType)
+    + bool remove(User u)
+    + bool remove(int id)
+    + User find(int id)
 }
 
 class Display {
     - Book activeBook
     - User activeUser
     - int pageNumber = 0
+    
+    + void displayUser(User user)
+    + void displayBook(Book book)
+    + void turnPageForward()
+    + void turnPageBackward()
+    + void refreshUsername()
+    + void refreshTitle()
+    + void refreshDetails()
+    + void refreshPage()
 }
 
 class Book {
     - int bookId
     - string details
+    
+    + int getId()
+    + void setID(int id)
+    + string getDetails()
+    + void setDetails(string d)
 }
 
 class User {
     - int userId
     - string details
     - int accountType
+    
+    + int userId
+    + string details
+    + int accountType
+    + void renewMembership()
+    + int getID()
+    + void setID(int id)
+    + string getDetails()
+    + void setDetails(string details)
+    + int getAccountType()
+    + void setAccountType(int t)
 }
 
+OnlineReaderSystem o-- Library
+OnlineReaderSystem o-- UserManager
+OnlineReaderSystem o-- Display
+
 @enduml
+
+*/
+
+/*
+  Assumptions:
+    - User memberships creation and extension
+    - Searching the database of books
+    - Reading a book
+    - Only one active user at a time
+    - Only one active book by this user
 */
