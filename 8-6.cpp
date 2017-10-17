@@ -53,3 +53,11 @@ JigsawPuzzle *-- Piece
 @enduml
 
 */
+
+int main() {
+  JigsawPuzzle puzzle;
+  puzzle.generate();
+  if (fitsWith(a, b))
+    // TODO fitsWithの引数を足すべきか？ pos1, pos2を足してもいいが、そもそもこの関数は二つのピースがハマるか、どうかを確認するだけなので不適当か？
+  return 0;
+}
