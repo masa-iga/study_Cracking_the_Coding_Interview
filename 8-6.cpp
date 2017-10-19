@@ -15,33 +15,39 @@
 
 /*
 
-@startuml
-
 class JigsawPuzzle {
-    - Piece[][] pieces
-    - const uint32_t numOfWidth
-    - const uint32_t numOfHeight
+    - Piece *pPiece
+    - uint32_t numOfPieces
+    - uint32_t numOfWidth
+    - uint32_t numOfHeight
     
+    + JigsawPuzzle(int num)
     + bool fitsWith(Piece* a, Piece* b)
     + void generatePuzzle()
 }
 
 class Piece {
+    - Edges edges
     - Point correctPos
-    - Edge leftEdge
-    - Edge upperEdge
-    - Edge rightEdge
-    - Edge lowerEdge
     - Texture texture
     - Point currentPos
     - int currentAngle
     - bool fitted
     
-    + Piece(Point correctPos, Edge l, Edge u, Edge r, Edge l)
+    + Piece(Point correctPos, Edges edges)
     + bool setTexture(Texture tex)
     + bool setCurrentPos(Point p)
     + bool setAngle(int angle)
     + bool isFitted()
+}
+
+class Edges {
+    - Edge left
+    - Edge uppder
+    - Edge right
+    - Edge lower
+    
+    + Edges(Edge l, Edge u, Edge r, Edge l)
 }
 
 enum Edge {
@@ -49,8 +55,7 @@ enum Edge {
 }
 
 JigsawPuzzle *-- Piece
-
-@enduml
+Piece *-- Edges
 
 */
 
