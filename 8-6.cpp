@@ -16,7 +16,7 @@
 /*
 
 class JigsawPuzzle {
-    - Piece* pPieces
+    - Piece *pPiece
     - uint32_t numOfPieces
     - uint32_t numOfWidth
     - uint32_t numOfHeight
@@ -24,7 +24,6 @@ class JigsawPuzzle {
     + JigsawPuzzle(int num)
     + bool fitsWith(Piece* a, Piece* b)
     + void generatePuzzle()
-    + Piece* getPieces()
 }
 
 class Piece {
