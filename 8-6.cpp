@@ -16,7 +16,7 @@
 /*
 
 class JigsawPuzzle {
-    - Piece *pPiece
+    - Piece* pPieces
     - uint32_t numOfPieces
     - uint32_t numOfWidth
     - uint32_t numOfHeight
@@ -24,6 +24,7 @@ class JigsawPuzzle {
     + JigsawPuzzle(int num)
     + bool fitsWith(Piece* a, Piece* b)
     + void generatePuzzle()
+    + Piece* getPieces()
 }
 
 class Piece {
@@ -62,7 +63,26 @@ Piece *-- Edges
 int main() {
   JigsawPuzzle puzzle;
   puzzle.generate();
-  if (fitsWith(a, b))
-    // TODO fitsWithの引数を足すべきか？ pos1, pos2を足してもいいが、そもそもこの関数は二つのピースがハマるか、どうかを確認するだけなので不適当か？
+  solve(puzzle);
   return 0;
+}
+
+void solve(JigsawPuzzle puzzle) {
+  if (puzzle == NULL)
+    return ;
+  
+  findLeftUpperCorner(puzzle.getPieces())
+  Piece* leftUpperCorner = findPieceAt(0, 0); // TODO: Puzzle class内でのxy座標と正解のxy座標をどうやって表現するか
+  if (leftUpperCorner == NULL) {
+    ASSERT();
+    return;
+  }
+  leftUpperCorner.setFitted(TRUE);
+  
+  for (uint32_t i=0; i < puzzle.numOfPiece(); i++) {
+    onePiece = puzzle.getUnfittedPiece(i);
+    if (fitsWith(leftUpperCorner, onePiece)) {
+      ;
+    }
+  }
 }
