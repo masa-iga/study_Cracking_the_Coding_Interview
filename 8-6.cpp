@@ -69,19 +69,31 @@ int main() {
 void solve(JigsawPuzzle puzzle) {
   if (puzzle == NULL)
     return ;
-  
-  findLeftUpperCorner(puzzle.getPieces())
-  Piece* leftUpperCorner = findPieceAt(0, 0); // TODO: Puzzle class内でのxy座標と正解のxy座標をどうやって表現するか
-  if (leftUpperCorner == NULL) {
-    ASSERT();
-    return;
-  }
-  leftUpperCorner.setFitted(TRUE);
-  
-  for (uint32_t i=0; i < puzzle.numOfPiece(); i++) {
-    onePiece = puzzle.getUnfittedPiece(i);
-    if (fitsWith(leftUpperCorner, onePiece)) {
-      ;
+
+  // Try to solve from outside to inside
+  uint32_t numOfPerimeter = puzzle.getNumOfPerimeter();
+  for (uint32_t i = 0; i < numOfPerimeter; i++) {
+    // Let's take a left-upper corner in the perimeter
+    Piece* piece = puzzle.getPieceAt(i, i); // TODO: Puzzle class内でのxy座標と正解のxy座標をどうやって表現するか
+    if (piece == NULL) {
+      ASSERT(TRUE);
+      return;
     }
+    puzzle.setAt(i, i, piece);
+    piece.setFitted(TRUE);
+
+    // Walk through upper edge
+    for (uint32_t j = 0; j < puzzle.numOfWidth(); j++) {
+      for (uint32_t k = 0; k < puzzle.numOfPieces(); k++) {
+        Piece tryPiece = puzzle.getUnfittedPiece(k);
+        if (tryPiece == NULL) continue;
+        if (fitsWith(piece, tryPiece)) {
+          // TODO コーディングしている最中
+        }
+      }
+    }
+    // Walk through right side edge
+    // Walk through bottom edge
+    // Walk through left side edge
   }
 }
