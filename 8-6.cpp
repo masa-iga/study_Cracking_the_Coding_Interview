@@ -82,16 +82,20 @@ void solve(JigsawPuzzle puzzle) {
     puzzle.setAt(i, i, piece);
     piece.setFitted(TRUE);
 
+    const uint32_t width = puzzle.getWidth() - 2*i;
+    const uint32_t height = puzzle.getHeight() - 2*i;
+
     // Walk through upper edge
-    for (uint32_t j = 0; j < puzzle.numOfWidth(); j++) {
+    for (uint32_t j = i+1; j < width; j++) {
       for (uint32_t k = 0; k < puzzle.numOfPieces(); k++) {
-        Piece tryPiece = puzzle.getUnfittedPiece(k);
-        if (tryPiece == NULL) continue;
-        if (fitsWith(piece, tryPiece)) {
-          // TODO コーディングしている最中
+        Piece tryPiece = puzzle.getPieceOf(k);
+        if (tryPiece.isFitted()) continue;
+        if (fitsWidh(piece, tryPiece)) {
+          // TODO
         }
       }
     }
+    
     // Walk through right side edge
     // Walk through bottom edge
     // Walk through left side edge
