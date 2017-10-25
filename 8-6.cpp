@@ -89,9 +89,11 @@ void solve(JigsawPuzzle puzzle) {
     for (uint32_t j = i+1; j < width; j++) {
       for (uint32_t k = 0; k < puzzle.numOfPieces(); k++) {
         Piece tryPiece = puzzle.getPieceOf(k);
-        if (tryPiece.isFitted()) continue;
+        if (tryPiece.isFitted())
+          continue;
         if (fitsWidh(piece, tryPiece)) {
-          // TODO
+          puzzle.setAt(j, height);
+          tryPiece.setFitted(TRUE);
         }
       }
     }
@@ -101,3 +103,29 @@ void solve(JigsawPuzzle puzzle) {
     // Walk through left side edge
   }
 }
+
+/*
+
+class puzzle {
+    Piece[] pieces
+    Piece[][] solution
+
+    Edge[] inners
+    Edge[] outers
+    Edge[] flats
+    Piece[] corners
+    
+    void sort()
+    void solve()
+}
+
+class Piece {
+    Edge[] edges
+    bool isCorner()
+}
+
+class Edge {
+    
+}
+
+*/
