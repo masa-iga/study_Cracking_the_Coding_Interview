@@ -104,9 +104,13 @@ void solve(JigsawPuzzle puzzle) {
   }
 }
 
+/*******************************************
+  Solution
+*******************************************/
+
 /*
 
-class puzzle {
+class Puzzle {
     Piece[] pieces
     Piece[][] solution
 
@@ -125,7 +129,45 @@ class Piece {
 }
 
 class Edge {
+    Piece *parent
+    Type type
+    int index
+    Edge *attached_to
     
+    bool fitsWith(Edge edge)
 }
 
+Enum Type {
+    inner
+    outer
+    flat
+}
+
+Puzzle *-- Piece
+Piece *--* Edge
+Edge *-- Type
+
+*/
+
+void sort() {
+  for each Piece p in pieces {
+    if (p has two flat edges) then add p to corners;
+    
+    for each edge in p.edges {
+      if edge is inner then add to inners;
+      if edge is outer then add to outers;
+    }
+  }
+}
+
+/*
+  It finds an open edge on the corner and tries to match it to an open piece.
+  When if finds a match, it does the following:
+    1. Attaches the edge
+    2. Removes the edge from the list of open edges
+    3. Finds the next open edge
+    
+  The next open edge is defined to be the one directly opposite the current edge, if it is available.
+  If it is not available, then the next edge can be any other edge. This will cause the puzzle to be
+  solved in a spiral-like fashion, from the outside to the inside.
 */
