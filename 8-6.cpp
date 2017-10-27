@@ -171,3 +171,65 @@ void sort() {
   If it is not available, then the next edge can be any other edge. This will cause the puzzle to be
   solved in a spiral-like fashion, from the outside to the inside.
 */
+
+void solve() {
+  /* Pick any corner to start with */
+  Edge currentEdge = getExposedEdge(corner[0]);
+  
+  /* Loop will iterate in a spiral like fashion unti the puzzle is full. */
+  while (currentEdge != NULL) {
+    /* Match with opposite edges. Inners with outers, etc. */
+    vector<Edge*> opposites = currentEdge.type == inner ?
+      outers : inners;
+    for each Edge fittingEdge in opposites {
+      if (currentEdge.fitshWith(fittingEdge)) {
+        attachEdges(currentEdge, fittingEdge); // attach edge
+        removeFromList(currentEdge);
+        removeFromList(fittingEdge);
+        
+        /* get next edge */
+        currentEdge = nextExposedEdge(fittingEdge);
+        break; // Break out of inner loop. Continu in outer.
+      }
+    }
+  }
+}
+
+void removeFromList(Edge edge) {
+  if (edge.type == flat) return;
+  vector<Edge*> array = currentEdge.type == inner ? inners : outers;
+  for (auto itr=array.begin(); itr != array.end(); itr++) {
+    if (*itr == edge) {
+      array.erase(itr);
+      break;
+    }
+  }
+}
+
+/* Return the opposite edge if possible. Else, return any exposed edge. */
+Edge* nextExposedEdge(Edge* edge) {
+  int next_index = (edge->index + 2) % 4; // Opposite edge
+  Edge* next_edge = edge->parent->edges[next_index];
+  if (isExposed(next_edge)) {
+    return next_edge;
+  }
+  return getExposedEdge(edge->parent);
+}
+
+void attachEdges(Edge* e1, Edge* e2) {
+  e1->attached_to = e2;
+  e2->attached_to = e1;
+}
+
+Edge* isExposed(Edge* e1) {
+  return edge->type != flat && edge->attached_to == NULL;
+}
+
+Edge* getExposedEdge(Piece* p) {
+  for each Edge edge in p->edges {
+    if (isExposed(edge)) {
+      return edge;
+    }
+  }
+  return NULL;
+}
