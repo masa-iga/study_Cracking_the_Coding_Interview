@@ -38,3 +38,82 @@
   What are the key objects and methods?
     a concept of users, conversations, and status messages.
 */
+
+/*
+
+class UserManager {
+    {static}  UserManager instance
+    HashMap<int, User>  usersById
+    HashMap<string, User>   usersByAccountName
+    HashMap<int, User>  onlineUsers
+}
+
+class User {
+    int id
+    UserStatus  status
+    HashMap<int, PrivateChat>   privateChats
+    ArrayList<GroupChat>    groupChats
+    HashMap<int, AddRequest>    receiveAddRequests
+    HashMap<int, AddRequest>    sentAddRequests
+    HashMap<int, User>  contacts
+    string  accountName
+    string  fullName
+}
+
+abstract class Conversation {
+    # ArrayList<User>   participants
+    # int id
+    # ArrayList<Message>    messages
+}
+
+class GroupChat {
+}
+
+class PrivateChat {
+}
+
+class Message {
+    string  content
+    Date    date
+}
+
+class AddRequest {
+    User    fromUser
+    User    toUser
+    Date    date
+    RequestStatus   status
+}
+
+class UserStatus {
+    string  message
+    UserStatusType  type
+}
+
+enum UserStatusType {
+    offline
+    Away
+    Idle
+    Available
+    Busy
+}
+
+enum RequestsStatus {
+    Unread
+    Read
+    Accepted
+    Rejected
+}
+
+
+UserManager *-- User
+Conversation <|-- GroupChat
+Conversation <|-- PrivateChat
+Conversation o-- Message
+User *-- UserStatus
+User *-- AddRequest
+User *-- GroupChat
+User *-- PrivateChat
+UserStatus o-- UserStatusType
+AddRequest o-- RequestsStatus  
+
+*/
