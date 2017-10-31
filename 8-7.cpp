@@ -42,28 +42,49 @@
 /*
 
 class UserManager {
-    {static}  UserManager instance
-    HashMap<int, User>  usersById
-    HashMap<string, User>   usersByAccountName
-    HashMap<int, User>  onlineUsers
+    {static}  UserManager : instance
+    HashMap<int, User> : usersById
+    HashMap<string, User> : usersByAccountName
+    HashMap<int, User> : onlineUsers
+    
+    static UserManager getInstance()
+    void addUser(User, string)
+    void approveAddRequest(AddRequest)
+    void rejectAddRequest(AddRequest)
+    void userSignedOn(string)
+    void userSignedOff(string)
 }
 
 class User {
-    int id
-    UserStatus  status
-    HashMap<int, PrivateChat>   privateChats
-    ArrayList<GroupChat>    groupChats
-    HashMap<int, AddRequest>    receiveAddRequests
-    HashMap<int, AddRequest>    sentAddRequests
-    HashMap<int, User>  contacts
-    string  accountName
-    string  fullName
+    int : id
+    UserStatus : status
+    HashMap<int, PrivateChat> : privateChats
+    ArrayList<GroupChat> : groupChats
+    HashMap<int, AddRequest> : receiveAddRequests
+    HashMap<int, AddRequest> : sentAddRequests
+    HashMap<int, User> : contacts
+    string : accountName
+    string : fullName
+    
+    bool sendMessageToUser(User, string)
+    bool sendMessageToGroupChat(int id, string)
+    void setStatus(UserStatus)
+    UserStatus getStatus()
+    bool addContact(User)
+    void receiveAddRequest(AddRequest)
+    void sentAddRequesst(AddRequest)
+    void removeAddRequest(AddRequest)
+    void addConversation(PrivateChat)
+    void addConversation(GropuChat)
+    int getId()
+    string getAccountName()
+    string getFullName()
 }
 
 abstract class Conversation {
-    # ArrayList<User>   participants
-    # int id
-    # ArrayList<Message>    messages
+    # ArrayList<User> : participants
+    # int : id
+    # ArrayList<Message> : messages
 }
 
 class GroupChat {
@@ -73,20 +94,20 @@ class PrivateChat {
 }
 
 class Message {
-    string  content
-    Date    date
+    string : content
+    Date : date
 }
 
 class AddRequest {
-    User    fromUser
-    User    toUser
-    Date    date
-    RequestStatus   status
+    User : fromUser
+    User : toUser
+    Date : date
+    RequestStatus : status
 }
 
 class UserStatus {
-    string  message
-    UserStatusType  type
+    string : message
+    UserStatusType : type
 }
 
 enum UserStatusType {
@@ -105,12 +126,11 @@ enum RequestsStatus {
 }
 
 
-UserManager *-- User
+UserManager o-- User
 Conversation <|-- GroupChat
 Conversation <|-- PrivateChat
 Conversation o-- Message
 User *-- UserStatus
-User *-- AddRequest
 User *-- GroupChat
 User *-- PrivateChat
 UserStatus o-- UserStatusType
