@@ -1,6 +1,7 @@
 /*
   Question:
-    Explain how you would design a chat server. In particular, provide detail about the various backend components, classes, and methods. What would be the hardest problem to solve?
+    Explain how you would design a chat server. In particular, provide detail about the various backend components,
+    classes, and methods. What would be the hardest problem to solve?
 
   How to approach:
     1. Handle ambiguity
@@ -31,9 +32,13 @@
     - Updating a status message
     - Creating private and group chats
     - Adding new messages to private and group chats
+  
+  What can we learn about these requirements?
+    We must have a concept of users, add request status, online status, and messages.
     
   What are the core components of the system?
-    a database, a set of clients, and a set of servers, but we won't include these parts in our OOD here.
+    a database, a set of clients, and a set of servers,
+    but we won't include these parts in our OOD here.
     
   What are the key objects and methods?
     a concept of users, conversations, and status messages.
@@ -85,17 +90,29 @@ abstract class Conversation {
     # ArrayList<User> : participants
     # int : id
     # ArrayList<Message> : messages
+    
+    ArrayList<Message> : getMessages()
+    bool : addMessage(Message)
+    int : getId()
 }
 
 class GroupChat {
+    void : removeParticipant(User)
+    void : addParticipant()
 }
 
 class PrivateChat {
+    PrivateChat(User user1, User user2)
+    User : getOtherParticipant(User)
 }
 
 class Message {
     string : content
     Date : date
+    
+    Message(string content, Date date)
+    string : getContent()
+    Date : getDate()
 }
 
 class AddRequest {
@@ -103,13 +120,22 @@ class AddRequest {
     User : toUser
     Date : date
     RequestStatus : status
+    
+    AddRequest(User from, User to, Date date)
+    RequestStatus : getStatus()
+    User : getFromUser()
+    User : getToUser()
+    Date : getDate()
 }
 
 class UserStatus {
     string : message
     UserStatusType : type
+    
+    UserStatus(UserStatusType, string)
+    UserStatusType : getStatusType()
+    string : getMessage()
 }
-
 enum UserStatusType {
     offline
     Away
@@ -117,23 +143,20 @@ enum UserStatusType {
     Available
     Busy
 }
-
 enum RequestsStatus {
     Unread
     Read
     Accepted
     Rejected
 }
-
-
 UserManager o-- User
 Conversation <|-- GroupChat
 Conversation <|-- PrivateChat
-Conversation o-- Message
+Conversation *-- Message
 User *-- UserStatus
 User *-- GroupChat
 User *-- PrivateChat
 UserStatus o-- UserStatusType
-AddRequest o-- RequestsStatus  
+AddRequest o-- RequestsStatus 
 
 */
