@@ -52,12 +52,12 @@ class UserManager {
     HashMap<string, User> : usersByAccountName
     HashMap<int, User> : onlineUsers
     
-    static UserManager getInstance()
-    void addUser(User, string)
-    void approveAddRequest(AddRequest)
-    void rejectAddRequest(AddRequest)
-    void userSignedOn(string)
-    void userSignedOff(string)
+    {static} UserManager : getInstance()
+    void  : addUser(User, string toAccountName)
+    void  : approveAddRequest(AddRequest)
+    void  : rejectAddRequest(AddRequest)
+    void  : userSignedOn(string accountName)
+    void  : userSignedOff(string accountName)
 }
 
 class User {
@@ -159,4 +159,25 @@ User *-- PrivateChat
 UserStatus o-- UserStatusType
 AddRequest o-- RequestsStatus 
 
+*/
+
+/*
+  What problems would be the hardest to solve (or the most interesting)?
+    Q1: How do we know if someone is online?
+      While we would like users tell us when they sign off, we can't know for sure.
+      A user's connection might have died, for example. To make sure that we know when a user has signed off,
+      we might try regulary pinging the client to make sure it's still there.
+    
+    Q2: How do we deal with conflicting information?
+      We have some information stored in the computer's memory and some in the database.
+      What happens if they get out of sync? Which one is "right"?
+    
+    Q3: How do we make our server scale?
+      While we designed our chat server without worrying - too much - about scalability, in
+      real life this would be a concern. We'd need to split our data across many servers, which
+      would increase our concern about out-of-sync data.
+    
+    Q4: How do we prevent denial of service attacks?
+      Clients can push data to us - what if they try to DOS (denial of service) us? How do we
+      prevent that?
 */
