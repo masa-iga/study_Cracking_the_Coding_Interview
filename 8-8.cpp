@@ -80,6 +80,11 @@ Answer:
     what is really the same object is propably not wise. It may be better to just
     have a Piece class, with a flag in it representing the current color.
 
+  Do we need separate Board and Game classes?
+  
+  Who keeps score?
+  
+  Should Game be a Singleton class?
 
 Enum Direction {
     left, right, up, down
@@ -100,7 +105,9 @@ class Game {
 }
 
 class Board {
-    Piece[][] board
+    Piece[][] : board
+    int : blackCount
+    int : whiteCount
     
     Board(int rows, int columns)
     void : initialize()
@@ -111,9 +118,19 @@ class Board {
 }
 
 class Piece {
+    Color : color
+    
+    void : flip()
+    Color : getColor()
 }
 
 class Player {
+    Color color
+    
+    Player(Color)
+    int : getScore()
+    bool playPiece(int r, int c)
+    Color : getColor()
 }
 
 Game *-- Board
