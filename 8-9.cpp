@@ -14,7 +14,7 @@
  
  /*
  
- abstract class Entry {
+abstract class Entry {
     # Directory : parent
     # long : created
     # long : lastUpdated
@@ -22,17 +22,42 @@
     # string : name
     
     Entry(string, Directory)
+    bool : delete()
+    {abstract} int : size()
+    string : getFullPath()
+    
+    long : getCreatingTime()
+    long : getLastUpdatedTime()
+    long : getLastAccessedTime()
+    void : changeName(string)
+    string : getName()
 }
 
 class File {
+    string : content
+    int : size
+    
+    File(string name, Directory, int size)
+    
+    int : size()
+    string : getContents()
+    void : setContents(string)
 }
 
 class Directory {
+    # ArrayList<Entry> : contents
+    
+    Directory(string, Directory)
+    int : size()
+    int : numberOfFiles()
+    bool : deleteEntry(Entry)
+    void : addEntry(Entry)
+    # ArrayList<Entry> : getContents()
 }
 
 Entry <|-- File
 Entry <|-- Directory
-
+Directory o-- Entry
 */
 
 int Directory::size() {
