@@ -17,3 +17,46 @@
     2. Open addressing
     3. ...
 */    
+
+
+
+/*
+  Interface:
+    map<string, int> hash;
+    hash[key] = 10;
+    int a = hash[key];
+*/
+
+#include <cstdio>
+#include <cstdint>
+#include <string>
+using namespace std;
+
+class hashTable {
+public:
+  hashTable(uint32_t size) :
+    size_(size) {
+    	table_ = new string[size];
+    }
+  ~hashTable() { delete[] table_; }
+  
+  void set(string key, string val);
+  string get(string key);
+  void remove(string key);
+
+private:
+  uint32_t size_;
+  string *table_;
+  uint32_t hashFunction(string key, uint32_t max);
+};
+
+
+struct Node {
+	Node* next_;
+	string d_;
+};
+
+
+int main() {
+	return 0;
+}
