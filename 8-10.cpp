@@ -30,17 +30,24 @@
 #include <cstdio>
 #include <cstdint>
 #include <string>
+#include <iostream>
 #include <functional>
+#include "CppUTest/TestHarness.h"
+#include "CppUTest/CommandLineTestRunner.h"
 using namespace std;
 
-class hashTable {
+
+class HashTable {
 public:
-  hashTable(uint32_t size) :
+  HashTable(uint32_t size) :
     size_(size) {
-    	table_ = new string[size];
+      CHECK(size != 0);
+      table_ = new string[size];
     }
-  ~hashTable() { delete[] table_; }
-  
+  ~HashTable() {
+    delete[] table_;
+  }
+
   void set(string key, string val);
   string get(string key);
   void remove(string key);
@@ -51,17 +58,47 @@ private:
   uint32_t hashFunction(string key, uint32_t max);
 };
 
-uint32_t hashFunction(string key, uint32_t max) {
-	hash<string> str_hash;
-	return ((uint32_t)str_hash(key)) % max;
-}
-
 struct Node {
-	Node* next_;
-	string d_;
+  Node* next_;
+  string d_;
 };
 
+void HashTable::set(string key, string val) {
+  ;
+}
 
-int main() {
-	return 0;
+string HashTable::get(string key) {
+  return string("0");
+}
+
+uint32_t HashTable::hashFunction(string key, uint32_t max) {
+  hash<string> str_hash;
+  return ((uint32_t)str_hash(key)) % max;
+}
+
+/*************************************************
+    Test code
+*************************************************/
+
+TEST_GROUP(FirstTestGroup)
+{
+    HashTable *hashTable;
+    const uint32_t size = 1000;
+    TEST_SETUP() {
+        hashTable = new HashTable(size);
+    }
+    TEST_TEARDOWN() {
+        delete hashTable;
+    }
+};
+
+TEST(FirstTestGroup, GeneralPattern) {
+  cout << "---   FirstTestGroup   ---" << endl;
+  hashTable->set("key1", "val1");
+  STRCMP_EQUAL("val1", hashTable->get("key1").c_str());
+}
+
+int main(int argc, char** argv)
+{
+    return CommandLineTestRunner::RunAllTests(argc, argv);
 }
