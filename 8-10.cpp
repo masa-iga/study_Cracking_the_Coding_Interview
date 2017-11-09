@@ -30,6 +30,7 @@
 #include <cstdio>
 #include <cstdint>
 #include <string>
+#include <functional>
 using namespace std;
 
 class hashTable {
@@ -50,6 +51,10 @@ private:
   uint32_t hashFunction(string key, uint32_t max);
 };
 
+uint32_t hashFunction(string key, uint32_t max) {
+	hash<string> str_hash;
+	return ((uint32_t)str_hash(key)) % max;
+}
 
 struct Node {
 	Node* next_;
